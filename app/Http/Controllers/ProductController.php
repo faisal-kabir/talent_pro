@@ -23,7 +23,7 @@ class ProductController extends Controller
     {
         try{
             $data=Product::create($request->all());
-            return ProductController::makeResponse(true,null,$data);
+            return ProductController::makeResponse(true,'Product has been stored successfully.',$data);
         } catch (Exception $e){
             return ProductController::makeResponse(false,'Please input valid data',null);
         }
@@ -44,7 +44,7 @@ class ProductController extends Controller
                 'price' => $request->price,
             ];
             $pro->update($data);
-            return ProductController::makeResponse(true,null,$request->all());
+            return ProductController::makeResponse(true,'Product has been updated successfully.',$request->all());
         } catch (Exception $e){
             return ProductController::makeResponse(false,'Please input valid data',null);
         }
@@ -58,7 +58,7 @@ class ProductController extends Controller
         }
         try{
             $pro->delete();
-            return ProductController::makeResponse(true,null,null);
+            return ProductController::makeResponse(true,'Product has been deleted successfully.',null);
         } catch (Exception $e){
             return ProductController::makeResponse(false,'Please input valid data',null);
         }
@@ -69,7 +69,7 @@ class ProductController extends Controller
         return response()->json(
             [
                 'status'=>$status,
-                'message'=> $message==null ? ($status ? 'success' : 'error') : $message,
+                'message'=> $message==null ? ($status ? 'Success' : 'Error') : $message,
                 'data'=>$data
             ],
             200
